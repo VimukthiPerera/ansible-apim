@@ -63,7 +63,7 @@
         src: "{{ product_package_location }}/lib/{{ jdbc_driver }}"
         dest: "{{ carbon_home }}/lib"
       when: jdbc_driver is defined
-      
+
     - name: Copy configuration templates
       template:
         src: "{{ item.src }}"
@@ -92,7 +92,7 @@
       when: misc_file_list is defined
 
 # Enable customization by uncommenting the following and adding the changes to the custom.yml
-    # - import_tasks: custom.yml
+    - import_tasks: custom.yml
 
     - name: Change the owner of WSO2 directory
       file:

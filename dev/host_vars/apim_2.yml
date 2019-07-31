@@ -1,0 +1,49 @@
+#----------------------------------------------------------------------------
+#  Copyright (c) 2018 WSO2, Inc. http://www.wso2.org
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#----------------------------------------------------------------------------
+
+---
+# NOTE: The parameterized values has the default values from the original pack. Please change them according to your
+# requirements. If you need to add additional configurations, please use the custom.yml under each role.
+
+hostname: localhost
+ports_offset: 0
+
+# User manager configurations
+admin_username: admin
+admin_password: admin
+
+# api-manager.xml configs
+oauth_configs_revoke_api_url: https://localhost:${https.nio.port}/revoke
+throttle_config_policy_deployer_url: https://localhost:${mgt.transport.https.port}${carbon.context}services/
+
+# List of configuration file templates, and the paths they should be written to
+config_files:
+  - { src: 'carbon-home/repository/conf/datasources/master-datasources.xml.j2',
+      dest: '{{ carbon_home }}/repository/conf/datasources/master-datasources.xml' }
+  - { src: 'carbon-home/repository/conf/carbon.xml.j2',
+      dest: '{{ carbon_home }}/repository/conf/carbon.xml' }
+  - { src: 'carbon-home/repository/conf/api-manager.xml.j2',
+      dest: '{{ carbon_home }}/repository/conf/api-manager.xml' }
+  - { src: 'carbon-home/repository/conf/registry.xml.j2',
+      dest: '{{ carbon_home }}/repository/conf/registry.xml' }
+  - { src: 'carbon-home/repository/conf/axis2/axis2.xml.j2',
+      dest: '{{ carbon_home }}/repository/conf/axis2/axis2.xml' }
+  - { src: 'carbon-home/repository/conf/tomcat/catalina-server.xml.j2',
+      dest: '{{ carbon_home }}/repository/conf/tomcat/catalina-server.xml' }
+  - { src: 'carbon-home/repository/conf/user-mgt.xml.j2',
+      dest: '{{ carbon_home }}/repository/conf/user-mgt.xml' }
+  - { src: 'carbon-home/bin/wso2server.sh.j2',
+      dest: '{{ carbon_home }}/bin/wso2server.sh' }

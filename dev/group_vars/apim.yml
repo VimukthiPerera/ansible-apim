@@ -18,13 +18,15 @@ wso2_group: wso2
 wso2_user: wso2carbon
 product_name: wso2am
 product_version: 2.6.0
-target: /mnt
+target: /vendor/WSO2
 product_package_location: files
 backup_dir: /tmp
 misc_file_location: "{{ product_package_location }}/misc"
 misc_file_copy_location: "{{ target }}/misc"
 security_file_location: "{{ product_package_location }}/security"
-#jdbc_driver: mysql-connector-java-5.1.47-bin.jar
+jdbc_driver: mysql-connector-java-5.1.47-bin.jar
+
+backup_enabled: true
 
 # Performance tuning configurations
 enable_performance_tuning: false
@@ -49,6 +51,13 @@ performance_tuning_file_list:
 #   - { src: '{{ misc_file_location }}/apimcli.zip',
 #       dest: '{{ misc_file_copy_location }}/apimcli.zip' }
 
+secutity_file_list:
+  - { src: '{{ product_package_location }}/wso2am/repository/resources/security/client-truststore.jks',
+      dest: '{{ carbon_home }}/repository/resources/security/client-truststore.jks' }
+  - { src: '{{ product_package_location }}/wso2am/repository/resources/security/wso2carbon.jks',
+      dest: '{{ carbon_home }}/repository/resources/security/wso2carbon.jks' }
+
+
 # Set the location the product packages should reside in (eg: "local" in the /files directory, "remote" in a remote location)
 pack_location: local
 #pack_location: remote
@@ -56,13 +65,13 @@ pack_location: local
 #remote_pack: "<URL_TO_APIM_PACK>"
 
 # JDK Distributions
-jdk_name: amazon-corretto-8.202.08.2-linux-x64
+jdk_name: jdk8u212-b04
 java_dir: /opt
 java_symlink: "{{ java_dir }}/java"
 java_home: "{{ java_dir }}/{{ jdk_name }}"
 
 # Enable analytics for API Manager
-analytics_enabled: false
+analytics_enabled: true
 # Server URL of the remote StreamProcessor server used to collect statistics. Must be specified in
 # protocol://hostname:port/ format.
 stream_processor_url: "{tcp://localhost:7612}"
@@ -108,22 +117,22 @@ traffic_manager_receiver_url: tcp://${carbon.local.ip}:${receiver.url.port}
 traffic_manager_auth_url: ssl://${carbon.local.ip}:${auth.url.port}
 
 # Datasource configurations
-wso2am_db_driver: org.h2.Driver
-wso2am_db_url: jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE
-wso2am_db_username: wso2carbon
-wso2am_db_password: wso2carbon
+wso2am_db_driver: com.mysql.jdbc.Driver
+wso2am_db_url: jdbc:mysql://172.28.128.1:3306/AAALIFE?useSSL=false
+wso2am_db_username: root
+wso2am_db_password: root
 wso2am_db_validation_query: SELECT 1
 
-wso2um_db_driver: org.h2.Driver
-wso2um_db_url: jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE
-wso2um_db_username: wso2carbon
-wso2um_db_password: wso2carbon
+wso2um_db_driver: com.mysql.jdbc.Driver
+wso2um_db_url: jdbc:mysql://172.28.128.1:3306/AAALIFE?useSSL=false
+wso2um_db_username: root
+wso2um_db_password: root
 wso2um_db_validation_query: SELECT 1
 
-wso2reg_db_driver: org.h2.Driver
-wso2reg_db_url: jdbc:h2:repository/database/REGISTRY_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;AUTO_SERVER=TRUE
-wso2reg_db_username: wso2carbon
-wso2reg_db_password: wso2carbon
+wso2reg_db_driver: com.mysql.jdbc.Driver
+wso2reg_db_url: jdbc:mysql://172.28.128.1:3306/AAALIFE?useSSL=false
+wso2reg_db_username: root
+wso2reg_db_password: root
 wso2reg_db_validation_query: SELECT 1
 
 # Key Store and Trust Store configuration

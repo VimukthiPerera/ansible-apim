@@ -22,17 +22,23 @@
   roles:
     - common
 
+# - name: Apply API Manager Analytics worker configuration to an apim-analytics-worker node
+#   hosts:
+#     - apim-analytics-worker_1
+#   roles:
+#     - apim-analytics-worker
+
 - name: Apply API Manager Analytics worker configuration to an apim-analytics-worker node
   hosts:
-    - apim-analytics-worker_1
+    - apim-analytics-dashboard_1
   roles:
-    - apim-analytics-worker
+    - apim-analytics-dashboard
 
-- name: Apply API Manager default configuration to an apim node
-  hosts:
-    - apim_1
-  roles:
-    - apim
+# - name: Apply API Manager default configuration to an apim node
+#   hosts:
+#     - apim_1
+#   roles:
+#     - apim
 
 # NOTE: There are multiple profiles for API Management. You can deploy any profile you prefer by deploying the role in
 # any host as follows.
